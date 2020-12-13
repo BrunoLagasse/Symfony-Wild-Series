@@ -7,17 +7,12 @@
 <div class="media">
     <div>
         {% for episode in episodes %} <br>
-            <h4>Episode: {{ episode.number }}</h4><br>
-            <b>Titre:</b> {{ episode.title }} <br>
-            <b>Synopsis:</b><br>
-            {{ episode.synopsis }}
-            <br>
+            <h4><a href="{{ path('program_season_episode_show', {seasonId: seasons.id, programId: program.id, episodeId: episode.id}) }}">Episode {{ episode.number }}</a></h4>
+            <b>Titre: </b>{{ episode.title }}<br>
         {% endfor %}
     </div>
 </div>
 <br>
-<a href="{{ path('program_index') }}">
-    Retour à la liste des programmes
-</a>
+<a href="{{ path('program_index') }}">Retour à la liste des programmes</a>
 
 {% endblock %}
