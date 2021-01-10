@@ -15,6 +15,11 @@
 	{% else %}
 		Aucune catégories trouvée.
 	{% endfor %}
+	<br>
+
+	<button><a href="{{ path('category_new')}}">Ajouter une Catégorie</a></button>
+
+	<br>
 
 	<a href="{{ path('app_index') }}">Retour à l'accueil</a>
 {% endblock %}

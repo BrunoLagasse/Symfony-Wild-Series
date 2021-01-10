@@ -1,16 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Actor #{{ actor.id }}{% endblock %}
+{% block title %}{{ actor.name }} {% endblock %}
 
 {% block body %}
+    <h1>{{ actor.name }}</h1>
 
-    <h1 class="text-center my-4">{{ actor.name }}</h1>
-    <h2>Listes des séries</h2>
-    <ul>
+    <div>
+        <h2>Séries jouées</h2>
+        <ul class = "program-list">
         {% for program in actor.programs %}
-            <li><a href="{{ path("program_show", { programId: program.id }) }}">{{ program.title }}</a></li>
-        {% else %}
-            Aucune série trouvé
+            <li class = "program-item">
+                 <div class="card" style="width: 18rem;">
+                    <img src="{{program.poster}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>{{ program.title }}</strong></h5>
+                        <p class="card-text"><i> Catégorie : {{ program.category.name }}</i></p>
+                        <a href="{{ path("program_show", { programId: program.id  }) }}" class="btn btn-primary">En savoir plus</a>
+                    </div>
+                </div>
+            </li>
         {% endfor %}
-    </ul>
+        <ul>
+    </div>
+    <section class = "btn-section">
+        <a class = "btn" href="{{ path('actor_index') }}">Liste des acteurs</a>
+        <a class = "btn" href="{{ path('actor_edit', {'id': actor.id}) }}">Modifier la fiche</a>
+        {{ include('actor/_delete_form.html.twig') }}
+    </section>
 {% endblock %}

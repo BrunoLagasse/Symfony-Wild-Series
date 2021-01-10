@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des acteurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des acteurs</h1>
+    <ul>
+        {% for actor in actors %} 
+            <div>
+                <li>
+                    <span>{{ actor.name }}</span>
+                    <a class = "btn" href="{{ path('actor_show', {'id': actor.id}) }}">Afficher</a>
+                    <a class = "btn" href="{{ path('actor_edit', {'id': actor.id}) }}">Modifier</a>
+                </li>
+            </div>
+        {% else %}
+                <li>Aucun acteur trouvé</li>
+        {% endfor %}
+    </ul>
+
+    <a class = "btn" href="{{ path('actor_new') }}">AJOUTER ACTEUR</a>
+{% endblock %}
