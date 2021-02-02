@@ -6,6 +6,8 @@ use App\Entity\Season;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Form\ProgramType;
+use App\Service\Slugify;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,20 +35,24 @@ class ProgramController extends AbstractController
             ['programs' => $programs]
         );
     }
-
+    
     /**
      * The controller for the program add form
      * @Route("/new", name="new")
      * @return Response
      */
-    public function new(Request $request) : Response
+    public function new(Request $request, Slugify $slugify) : Response
     {
         $program = new Program();
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid() ) {
             $entityManager = $this->getDoctrine()->getManager();
+            
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
+            
             $entityManager->persist($program);
             $entityManager->flush();
 
@@ -57,10 +63,10 @@ class ProgramController extends AbstractController
             "form" => $form->createView(),
         ]);
     }
-
+    
     /**
-     * @Route("/{programId}", requirements={"id"="\d+"}, methods={"GET"}, name="show")
-     * @ParamConverter("program", class="App\Entity\Program", options={"mapping": {"programId": "id"}})
+     * @Route("/{slug}", name="show")
+     * @ParamConverter ("program", class="App\Entity\Program", options={"mapping": {"slug": "slug"}})
      * @return Response
      */
     public function show(Program $program): Response

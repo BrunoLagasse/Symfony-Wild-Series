@@ -7,14 +7,11 @@
 {% block body %}
 	<h2>List des catégories :</h2>
 	{% for category in categories %}
-		<h2>
-			- Catégorie :
-			<br>
-			<a href="{{path('category_show', {categoryName: category.name})}}">{{ category.name }}</a>
-		</h2>
+			<a href="{{path('category_show', {categoryName: category.name})}}">{{ category.name }}</a><br>
 	{% else %}
 		Aucune catégories trouvée.
 	{% endfor %}
+
 	<br>
 
 	<button><a href="{{ path('category_new')}}">Ajouter une Catégorie</a></button>
