@@ -6,3 +6,4 @@
 ## Lien de la vidéo: https://www.youtube.com/watch?v=j3rslY0T7Gk (quête 15)
 ## Lien de la vidéo: https://www.youtube.com/watch?v=68-7heT6LX0&feature=youtu.be (quête 16)
 ## Lien de la vidéo: https://www.youtube.com/watch?v=BYXJxCYrgTI&feature=youtu.be (quête 17)
+## Lien de la vidéo: https://youtu.be/lhjjvgQIqwQ (quête 18)
